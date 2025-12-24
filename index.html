@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>圣诞快乐！</title>
+  <style>
+    body {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* 圣诞树 */
+    .tree {
+      position: relative;
+      width: 200px;
+      height: 300px;
+      margin: 0 auto;
+    }
+
+    .trunk {
+      width: 40px;
+      height: 60px;
+      background-color: #8B4513;
+      margin: 0 auto;
+      border-radius: 5px;
+    }
+
+    .leaves {
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 300px solid green;
+      margin: -20px auto 0;
+      position: relative;
+    }
+
+    /* 星星（在顶部） */
+    .star {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: yellow;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: blink 1s infinite;
+      cursor: pointer;
+      box-shadow: 0 0 20px gold;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* 视频弹窗 */
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    video {
+      max-width: 90%;
+      max-height: 80%;
+      border: 5px solid gold;
+      border-radius: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 圣诞树 -->
+  <div class="tree">
+    <div class="star" onclick="playVideo()"></div>
+    <div class="leaves"></div>
+    <div class="trunk"></div>
+  </div>
+
+  <!-- 视频弹窗 -->
+  <div class="video-container" id="videoModal">
+    <span class="close" onclick="closeVideo()">×</span>
+    <video controls autoplay id="myVideo">
+      <source src="video.mp4" type="video/mp4">
+      您的浏览器不支持视频播放。
+    </video>
+  </div>
+
+  <script>
+    function playVideo() {
+      document.getElementById('videoModal').style.display = 'flex';
+    }
+
+    function closeVideo() {
+      const video = document.getElementById('myVideo');
+      video.pause();
+      video.currentTime = 0;
+      document.getElementById('videoModal').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
